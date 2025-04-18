@@ -56,7 +56,12 @@ export function CustomDialog({
             >
               {secondaryBtnText}
             </Button>
-            <LoadingButton type="submit" form={formId} disabled={isLoading}>
+            <LoadingButton
+              type="submit"
+              form={formId}
+              disabled={isLoading}
+              loading={isLoading}
+            >
               {primaryBtnText}
             </LoadingButton>
           </DialogFooter>
