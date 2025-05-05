@@ -1,18 +1,18 @@
 import * as React from "react";
 import Link from "next/link";
 
-import { footerLinks, siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/layout/mode-toggle";
 
 import { NewsletterForm } from "../forms/newsletter-form";
 import { Icons } from "../shared/icons";
-import { footerLinks, siteConfig } from "../config/site";
+import {footerLinks, siteConfig} from "@/config/site";
+import Container from "@/components/Container";
 
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
     <footer className={cn("border-t", className)}>
-      <div className="container grid max-w-6xl grid-cols-2 gap-6 py-14 md:grid-cols-5">
+      <Container className="container grid grid-cols-2 gap-6 py-14 md:grid-cols-5">
         {footerLinks.map((section) => (
           <div key={section.title}>
             <span className="text-sm font-medium text-foreground">
@@ -35,42 +35,13 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
         <div className="col-span-full flex flex-col items-end sm:col-span-1 md:col-span-2">
           <NewsletterForm />
         </div>
-      </div>
+      </Container>
 
       <div className="border-t py-4">
-        <div className="container flex max-w-6xl items-center justify-between">
-          {/* <span className="text-muted-foreground text-sm">
+        <Container className="flex items-center justify-between">
+           <span className="text-muted-foreground text-sm">
             Copyright &copy; 2024. All rights reserved.
-          </span> */}
-          <p className="text-left text-sm text-muted-foreground">
-            Built by{" "}
-            <Link
-              href={siteConfig.links.twitter}
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              mickasmt
-            </Link>
-            . Hosted on{" "}
-            <Link
-              href="https://vercel.com"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              Vercel
-            </Link>
-            . Illustrations by{" "}
-            <Link
-              href="https://popsy.co"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              Popsy
-            </Link>
-          </p>
+          </span>
 
           <div className="flex items-center gap-3">
             <Link
@@ -83,7 +54,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             </Link>
             <ModeToggle />
           </div>
-        </div>
+        </Container>
       </div>
     </footer>
   );

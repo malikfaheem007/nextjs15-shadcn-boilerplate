@@ -1,19 +1,18 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { UserSubscriptionPlan } from "@/types";
+import {SubscriptionPlan, UserSubscriptionPlan} from "@/types";
 
-import { SubscriptionPlan } from "@/types/index";
 import { pricingData } from "@/config/subscriptions";
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { BillingFormButton } from "@/components/forms/billing-form-button";
-import { ModalContext } from "@/components/modals/providers";
 import { HeaderSection } from "@/components/shared/header-section";
 import { Icons } from "@/components/shared/icons";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
+import {useRouter} from "next/navigation";
+import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group";
 
 interface PricingCardsProps {
   userId?: string;
@@ -22,17 +21,16 @@ interface PricingCardsProps {
 
 export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
   const isYearlyDefault =
-    !subscriptionPlan?.stripeCustomerId || subscriptionPlan.interval === "year"
-      ? true
-      : false;
-  const [isYearly, setIsYearly] = useState<boolean>(!!isYearlyDefault);
-  const { setShowSignInModal } = useContext(ModalContext);
+    !subscriptionPlan?.stripeCustomerId || subscriptionPlan.interval === "year";
+  const [isYearly, setIsYearly] = useState<boolean>(isYearlyDefault);
 
   const toggleBilling = () => {
     setIsYearly(!isYearly);
   };
 
   const PricingCard = ({ offer }: { offer: SubscriptionPlan }) => {
+    const router = useRouter()
+
     return (
       <div
         className={cn(
@@ -104,7 +102,6 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
                 className={cn(
                   buttonVariants({
                     variant: "outline",
-                    rounded: "full",
                   }),
                   "w-full",
                 )}
@@ -125,8 +122,7 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
                   ? "default"
                   : "outline"
               }
-              rounded="full"
-              onClick={() => setShowSignInModal(true)}
+              onClick={() => router.push("/login")}
             >
               Sign in
             </Button>

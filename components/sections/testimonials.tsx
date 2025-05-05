@@ -2,11 +2,12 @@ import Image from "next/image";
 
 import { HeaderSection } from "@/components/shared/header-section";
 import { testimonials } from "../config/landing";
+import Container from "@/components/Container";
 
 export default function Testimonials() {
   return (
     <section>
-      <div className="container flex max-w-6xl flex-col gap-10 py-32 sm:gap-y-16">
+      <Container className="flex flex-col gap-10 py-32 sm:gap-y-16">
         <HeaderSection
           label="Testimonials"
           title="What our clients are sharing."
@@ -46,7 +47,7 @@ export default function Testimonials() {
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }
