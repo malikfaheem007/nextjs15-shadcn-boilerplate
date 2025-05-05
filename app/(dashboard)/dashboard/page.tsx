@@ -1,49 +1,22 @@
-"use client";
-
-import { Plus } from "lucide-react";
-import { DashboardColumns } from "./dashboard-column";
-import { useState } from "react";
-import {
-  AddDashboardItemDialog,
-  DashboardItem,
-} from "./AddDashboardItemDialog";
 import DashboardPageWrapper from "@/components/DashboardPageWrapper";
-import { DataTable } from "@/components/data-table";
-import AddressAutoComplete from "@/components/AddressAutoComplete/AddressAutoComplete";
+import {getCurrentOrgId, getUserOrganizations} from "@/app/actions/organizations";
+import {redirect} from "next/navigation";
+import {OrganizationSwitcher} from "@/app/(dashboard)/dashboard/OrgSwitcher";
 
-export default function DashboardPage() {
-  const [items, setItems] = useState<DashboardItem[]>([]);
+export default async function DashboardPage() {
 
-  function handleAddItem(item: DashboardItem) {
-    setItems((prev) => [...prev, item]);
-  }
+  const orgId = await getCurrentOrgId();
+  if (!orgId) redirect('/select-organization');
+  const organizations = await getUserOrganizations();
 
   return (
     <DashboardPageWrapper
       title="Dashboard"
       text="This is Dashboard page"
-      buttonText={
-        <AddDashboardItemDialog
-          onSubmit={handleAddItem}
-          trigger={
-            <span className="flex items-center gap-2">
-              <Plus size={16} />
-              Add Item
-            </span>
-          }
-        />
-      }
     >
-      <div className="mt-4 sm:mt-6 lg:mt-10">
-        <DataTable
-          data={items}
-          columns={DashboardColumns}
-          // onRowClick={...}
-        />
-      </div>
-      <div>
-        <AddressAutoComplete />
-      </div>
+      <div>Dashboard for org {orgId}</div>
+
+      <OrganizationSwitcher organizations={organizations} currentOrgId={orgId} />
     </DashboardPageWrapper>
   );
 }

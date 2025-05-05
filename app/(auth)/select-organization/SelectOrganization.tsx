@@ -2,24 +2,24 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import {createOrganization} from "@/utils/organizations";
+import {createOrganization, setCurrentOrgId} from '@/app/actions/organizations';
 
 interface SelectOrganization {
-    organizations: any[]
+    organizations: any[];
 }
 
-export default function SelectOrganization({organizations}: SelectOrganization) {
+export default function SelectOrganization({ organizations }: SelectOrganization) {
     const router = useRouter();
     const [name, setName] = useState('');
 
     async function handleCreateOrg() {
-        const data = await createOrganization(name);
-        localStorage.setItem('current_org_id', data);
+        const orgId = await createOrganization(name);
+        await setCurrentOrgId(orgId); // ✅ save to Supabase metadata
         router.push('/dashboard');
     }
 
-    function handleSelectOrg(id: string) {
-        localStorage.setItem('current_org_id', id);
+    async function handleSelectOrg(id: string) {
+        await setCurrentOrgId(id); // ✅ save to Supabase metadata
         router.push('/dashboard');
     }
 
