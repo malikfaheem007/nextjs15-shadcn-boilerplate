@@ -16,5 +16,5 @@ export async function signupAction(email: string, password: string) {
     redirect("/error");
   }
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/select-organization");
 }

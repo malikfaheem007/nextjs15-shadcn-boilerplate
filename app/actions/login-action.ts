@@ -12,12 +12,10 @@ export async function loginAction(email: string, password: string) {
     password,
   });
 
-  console.log(error);
-
   if (error) {
     redirect("/error");
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/select-organization");
 }
