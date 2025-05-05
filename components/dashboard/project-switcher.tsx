@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { Check, ChevronsUpDown, Plus } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -12,33 +11,48 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import {Organization} from "@/types/common";
+import {LoadingButton} from "@/components/LoadingButton";
+import {useRouter} from "next/navigation";
 
-export default function ProjectSwitcher({
+export default function ProjectSwitcher(
+    {
   large = false,
   organizations,
-    currentOrgId,
+  currentOrgId,
 }: {
   large?: boolean;
   organizations: Organization[];
-  currentOrgId: string
+  currentOrgId: string;
 }) {
+    const router = useRouter();
+    const [loading, setLoading] = useState(false);
+
+    async function handleSwitchOrg(orgId: string) {
+        setLoading(true);
+        await fetch('/api/set-current-org', {
+            method: 'POST',
+            body: JSON.stringify({ orgId }),
+        });
+        router.refresh(); // reload the page/server components
+    }
 
   const [openPopover, setOpenPopover] = useState(false);
 
   const selectedOrg = organizations?.find(org => org.id === currentOrgId);
 
-  if (!organizations || selectedOrg) {
+  if (!organizations || !selectedOrg) {
     return <ProjectSwitcherPlaceholder />;
   }
 
   return (
     <div>
       <Popover open={openPopover} onOpenChange={setOpenPopover}>
-        <PopoverTrigger>
-          <Button
+        <PopoverTrigger asChild>
+          <LoadingButton
             className="h-8 px-2"
             variant={openPopover ? "secondary" : "ghost"}
             onClick={() => setOpenPopover(!openPopover)}
+            loading={loading}
           >
             <div className="flex items-center space-x-3 pr-2">
               <div
@@ -54,7 +68,7 @@ export default function ProjectSwitcher({
                     large ? "w-full" : "max-w-[80px]",
                   )}
                 >
-                  test-slug
+                  {selectedOrg.name}
                 </span>
               </div>
             </div>
@@ -62,13 +76,14 @@ export default function ProjectSwitcher({
               className="size-4 text-muted-foreground"
               aria-hidden="true"
             />
-          </Button>
+          </LoadingButton>
         </PopoverTrigger>
         <PopoverContent align="start" className="max-w-60 p-2">
           <ProjectList
             selected={selectedOrg!}
             organizations={organizations}
             setOpenPopover={setOpenPopover}
+            handleSwitchOrg={handleSwitchOrg}
           />
         </PopoverContent>
       </Popover>
@@ -80,22 +95,26 @@ function ProjectList({
   selected,
   organizations,
   setOpenPopover,
+    handleSwitchOrg,
 }: {
   selected: Organization;
   organizations: Organization[];
   setOpenPopover: (open: boolean) => void;
+  handleSwitchOrg: (orgId: string) => void;
 }) {
   return (
     <div className="flex flex-col gap-1">
-      {organizations.map(({ id }) => (
-        <Link
+      {organizations.map(({ id, name }) => (
+        <Button
           key={id}
           className={cn(
             buttonVariants({ variant: "ghost" }),
             "relative flex h-9 items-center gap-3 p-3 text-muted-foreground hover:text-foreground",
           )}
-          href="#"
-          onClick={() => setOpenPopover(false)}
+          onClick={() => {
+            setOpenPopover(false)
+            handleSwitchOrg(id);
+          }}
         >
           <div className={cn("size-3 shrink-0 rounded-full", "bg-blue-500")} />
           <span
@@ -105,14 +124,14 @@ function ProjectList({
                 : "font-normal"
             }`}
           >
-            {id}
+            {name}
           </span>
           {selected.id === id && (
             <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-foreground">
               <Check size={18} aria-hidden="true" />
             </span>
           )}
-        </Link>
+        </Button>
       ))}
       <Button
         variant="outline"
@@ -122,7 +141,7 @@ function ProjectList({
         }}
       >
         <Plus size={18} className="absolute left-2.5 top-2" />
-        <span className="flex-1 truncate text-center">New Project</span>
+        <span className="flex-1 truncate text-center">New Organization</span>
       </Button>
     </div>
   );
