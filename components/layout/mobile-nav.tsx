@@ -14,6 +14,11 @@ import { DocsSidebarNav } from "@/components/docs/sidebar-nav";
 import { Icons } from "@/components/shared/icons";
 
 import { ModeToggle } from "./mode-toggle";
+import { docsConfig } from "../config/docs";
+import { marketingConfig } from "../config/marketing";
+import { DocsSidebarNav } from "../docs/sidebar-nav";
+import { Icons } from "../shared/icons";
+import { siteConfig } from "../config/site";
 
 export function NavMobile() {
   const { data: session } = useSession();
@@ -25,6 +30,8 @@ export function NavMobile() {
     docs: docsConfig.mainNav,
   };
 
+  // const links =
+  //   (selectedLayout && configMap[selectedLayout]) || marketingConfig.mainNav;
   const links =
     (selectedLayout && configMap[selectedLayout]) || marketingConfig.mainNav;
 
