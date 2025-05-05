@@ -40,14 +40,14 @@ export default function DashboardPageWrapper({
       )}
       <div className="flex w-full flex-col gap-4">
         <div className="flex items-center justify-between">
-          <div>
+          <div className="space-y-1">
             {title && (
-              <h1 className="text-tremor-default text-tremor-content-strong dark:text-dark-tremor-content-strong truncate text-lg font-semibold sm:text-xl">
+              <h1 className="font-heading text-2xl font-semibold">
                 {title}
               </h1>
             )}
             {text && (
-              <p className="text-sm leading-6 text-gray-500 dark:text-gray-400">
+              <p className="text-base text-muted-foreground">
                 {text}
               </p>
             )}
