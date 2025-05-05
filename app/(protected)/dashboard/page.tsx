@@ -1,7 +1,7 @@
 import DashboardPageWrapper from "@/components/DashboardPageWrapper";
 import {getCurrentOrgId, getUserOrganizations} from "@/app/actions/organizations";
 import {redirect} from "next/navigation";
-import {OrganizationSwitcher} from "@/app/(dashboard)/dashboard/OrgSwitcher";
+import {OrganizationSwitcher} from "@/app/(protected)/dashboard/OrgSwitcher";
 
 export default async function DashboardPage() {
 
