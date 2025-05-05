@@ -64,15 +64,14 @@ export function NavBar({ scroll = false, user }: NavBarProps) {
         </div>
 
         <div className="flex items-center space-x-3">
-          {user ? (
+          {!user ? (
             <Link
               href={user.role === "ADMIN" ? "/admin" : "/dashboard"}
               className="hidden md:block"
             >
               <Button
                 className="gap-2 px-5"
-                variant="default"
-                size="sm"
+                size="lg"
               >
                 <span>Dashboard</span>
               </Button>
@@ -80,8 +79,7 @@ export function NavBar({ scroll = false, user }: NavBarProps) {
           ) : (
               <Button
                   className="hidden gap-2 px-5 md:flex"
-                  variant="default"
-                  size="sm"
+                  size="lg"
                   onClick={() => router.push("/login")}
               >
                 <span>Sign In</span>
