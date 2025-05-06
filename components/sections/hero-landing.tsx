@@ -3,8 +3,8 @@ import Link from "next/link";
 import { cn, nFormatter } from "@/lib/utils";
 import {Button, buttonVariants} from "@/components/ui/button";
 import { Icons } from "@/components/shared/icons";
-import { siteConfig } from "../config/site";
 import Container from "@/components/Container";
+import {siteConfig} from "@/config/site";
 
 export default async function HeroLanding() {
 

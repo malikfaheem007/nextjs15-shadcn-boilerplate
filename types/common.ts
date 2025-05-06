@@ -18,7 +18,15 @@ export type SidebarNavItem = {
     icon?: keyof typeof Icons;
 };
 
+export type StripeSubscription = {
+    stripeSubscriptionId: string,
+    stripeCurrentPeriodEnd: number,
+    stripeCustomerId: string,
+    stripePriceId: string,
+}
+
 export type Organization = {
     id: string;
     name: string;
+    stripeSubscription: StripeSubscription
 };

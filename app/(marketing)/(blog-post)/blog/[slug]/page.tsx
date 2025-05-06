@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import "@/styles/mdx.css";
+// import "@/styles/mdx.css"; TODO --
 
 import { Metadata } from "next";
 import Link from "next/link";
@@ -15,12 +15,12 @@ import {
 } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import BlurImage from "@/components/shared/blur-image";
-import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 import { DashboardTableOfContents } from "@/components/shared/toc";
-import { BLOG_CATEGORIES } from "@/components/config/blog";
+import { BLOG_CATEGORIES } from "@/config/blog";
 import Author from "@/components/content/author";
 import { allPosts } from "@/.contentlayer/generated";
 import { Mdx } from "@/components/content/mdx-components";
+import Container from "@/components/Container";
 
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
@@ -85,7 +85,7 @@ export default async function PostPage({
 
   return (
     <>
-      <MaxWidthWrapper className="pt-6 md:pt-10">
+      <Container className="pt-6 md:pt-10">
         <div className="flex flex-col space-y-4">
           <div className="flex items-center space-x-4">
             <Link
@@ -94,9 +94,8 @@ export default async function PostPage({
                 buttonVariants({
                   variant: "outline",
                   size: "sm",
-                  rounded: "lg",
                 }),
-                "h-8"
+                "h-8 rounded-full"
               )}
             >
               {category.title}
@@ -120,12 +119,12 @@ export default async function PostPage({
             ))}
           </div>
         </div>
-      </MaxWidthWrapper>
+      </Container>
 
       <div className="relative">
         <div className="absolute top-52 w-full border-t" />
 
-        <MaxWidthWrapper className="grid grid-cols-4 gap-10 pt-8 max-md:px-0">
+        <Container className="grid grid-cols-4 gap-10 pt-8 max-md:px-0">
           <div className="relative col-span-4 mb-10 flex flex-col space-y-8 border-y bg-background md:rounded-xl md:border lg:col-span-3">
             <BlurImage
               alt={post.title}
@@ -146,10 +145,10 @@ export default async function PostPage({
           <div className="sticky top-20 col-span-1 mt-52 hidden flex-col divide-y divide-muted self-start pb-24 lg:flex">
             <DashboardTableOfContents toc={toc} />
           </div>
-        </MaxWidthWrapper>
+        </Container>
       </div>
 
-      <MaxWidthWrapper>
+      <Container>
         {relatedArticles.length > 0 && (
           <div className="flex flex-col space-y-4 pb-16">
             <p className="font-heading text-2xl text-foreground">
@@ -177,7 +176,7 @@ export default async function PostPage({
             </div>
           </div>
         )}
-      </MaxWidthWrapper>
+      </Container>
     </>
   );
 }

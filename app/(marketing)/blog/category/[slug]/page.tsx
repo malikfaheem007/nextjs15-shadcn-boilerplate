@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { constructMetadata, getBlurDataURL } from "@/lib/utils";
-import { BLOG_CATEGORIES } from "@/components/config/blog";
 import { allPosts } from "@/.contentlayer/generated";
 import { BlogCard } from "@/components/content/blog-card";
+import {BLOG_CATEGORIES} from "@/config/blog";
 
 export async function generateStaticParams() {
   return BLOG_CATEGORIES.map((category) => ({

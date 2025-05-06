@@ -10,9 +10,9 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { BillingFormButton } from "@/components/forms/billing-form-button";
 import { HeaderSection } from "@/components/shared/header-section";
 import { Icons } from "@/components/shared/icons";
-import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 import {useRouter} from "next/navigation";
 import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group";
+import Container from "@/components/Container";
 
 interface PricingCardsProps {
   userId?: string;
@@ -133,7 +133,7 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
   };
 
   return (
-    <MaxWidthWrapper>
+    <Container>
       <section className="flex flex-col items-center text-center">
         <HeaderSection label="Pricing" title="Start at full speed !" />
 
@@ -184,6 +184,6 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
           </strong>
         </p>
       </section>
-    </MaxWidthWrapper>
+    </Container>
   );
 }

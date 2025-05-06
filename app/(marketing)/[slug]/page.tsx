@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import "@/styles/mdx.css";
+// import "@/styles/mdx.css";
 
 import { Metadata } from "next";
 

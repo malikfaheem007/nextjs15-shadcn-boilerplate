@@ -1,14 +1,26 @@
 'use server'
 
 import {createClient} from "@/utils/supabase/server";
+import {Organization} from "@/types/common";
 
 export async function getUserOrganizations() {
     const supabase = await createClient();
     const { data, error } = await supabase.rpc('get_organizations');
 
-    if(error) throw new Error(error.message)
+    if(error) throw error;
 
     return data ?? [];
+}
+
+export async function getCurrentOrganization(id: string): Promise<Organization> {
+    const supabase = await createClient();
+    const { data, error } = await supabase.rpc('get_organization_by_id', {
+        org_id: id,
+    });
+
+    if(error) throw error;
+
+    return data
 }
 
 export async function createOrganization(name: string) {

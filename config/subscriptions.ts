@@ -1,5 +1,5 @@
-import { PlansRow, SubscriptionPlan } from "types";
 import { env } from "@/env.mjs";
+import {PlansRow, SubscriptionPlan} from "@/types";
 
 export const pricingData: SubscriptionPlan[] = [
   {

@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 
 import { HeaderSection } from "../shared/header-section";
+import Container from "@/components/Container";
 
 const pricingFaqData = [
   {
@@ -42,7 +43,7 @@ const pricingFaqData = [
 
 export function PricingFaq() {
   return (
-    <section className="container max-w-4xl py-2">
+    <Container className="max-w-4xl py-2">
       <HeaderSection
         label="FAQ"
         title="Frequently Asked Questions"
@@ -61,6 +62,6 @@ export function PricingFaq() {
           </AccordionItem>
         ))}
       </Accordion>
-    </section>
+    </Container>
   );
 }

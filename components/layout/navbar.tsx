@@ -64,7 +64,7 @@ export function NavBar({ scroll = false, user }: NavBarProps) {
         </div>
 
         <div className="flex items-center space-x-3">
-          {!user ? (
+          {user ? (
             <Link
               href={user.role === "ADMIN" ? "/admin" : "/dashboard"}
               className="hidden md:block"

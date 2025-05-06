@@ -6,9 +6,9 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import { Drawer } from "vaul";
 
-import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 import { BLOG_CATEGORIES } from "@/config/blog";
 import { cn } from "@/lib/utils";
+import Container from "@/components/Container";
 
 export function BlogHeaderLayout() {
   const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ export function BlogHeaderLayout() {
 
   return (
     <>
-      <MaxWidthWrapper className="py-6 md:pb-8 md:pt-10">
+      <Container className="py-6 md:pb-8 md:pt-10">
         <div className="max-w-screen-sm">
           <h1 className="font-heading text-3xl md:text-4xl">
             {data?.title || "Blog"}
@@ -49,7 +49,7 @@ export function BlogHeaderLayout() {
             <CategoryLink title="Guides" href="/guides" active={false} />
           </ul>
         </nav>
-      </MaxWidthWrapper>
+      </Container>
 
       <Drawer.Root open={open} onClose={closeDrawer}>
         <Drawer.Trigger

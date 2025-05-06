@@ -5,7 +5,7 @@ import { auth } from "@/auth";
 import { UserRole } from "@prisma/client";
 
 import { prisma } from "@/lib/db";
-import { userRoleSchema } from "@/lib/validations/user";
+import { userRoleSchema } from "@/validations/user";
 
 export type FormData = {
   role: UserRole;

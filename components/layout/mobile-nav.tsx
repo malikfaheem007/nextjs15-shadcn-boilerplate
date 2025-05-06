@@ -7,10 +7,10 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { ModeToggle } from "./mode-toggle";
-import { marketingConfig } from "../config/marketing";
 import { Icons } from "../shared/icons";
-import { siteConfig } from "../config/site";
 import {UserRoles} from "@/constants";
+import {marketingConfig} from "@/config/marketing";
+import {siteConfig} from "@/config/site";
 
 export function NavMobile({user}: {user: any}) {
   const [open, setOpen] = useState(false);

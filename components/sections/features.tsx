@@ -3,9 +3,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { HeaderSection } from "@/components/shared/header-section";
 import { Icons } from "@/components/shared/icons";
-import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
-import { features } from "../config/landing";
 import Container from "@/components/Container";
+import {features} from "@/config/landing";
 
 export default function Features() {
   return (

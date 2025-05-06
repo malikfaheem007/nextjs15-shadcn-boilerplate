@@ -2,7 +2,7 @@
 
 import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
-import { userNameSchema } from "@/lib/validations/user";
+import { userNameSchema } from "@/validations/user";
 import { revalidatePath } from "next/cache";
 
 export type FormData = {

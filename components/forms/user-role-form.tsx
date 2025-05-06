@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { userRoleSchema } from "@/lib/validations/user";
+import { userRoleSchema } from "@/validations/user";
 import { Button } from "@/components/ui/button";
 import {
   Form,

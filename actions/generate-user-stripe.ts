@@ -1,10 +1,10 @@
 "use server";
 
-import { auth } from "@/auth";
 import { stripe } from "@/lib/stripe";
 import { getUserSubscriptionPlan } from "@/lib/subscription";
 import { absoluteUrl } from "@/lib/utils";
 import { redirect } from "next/navigation";
+import {getCurrentUser} from "@/app/actions/user";
 
 export type responseAction = {
   status: "success" | "error";
@@ -18,8 +18,7 @@ export async function generateUserStripe(priceId: string): Promise<responseActio
   let redirectUrl: string = "";
 
   try {
-    const session = await auth()
-    const user = session?.user;
+    const user = await getCurrentUser();
 
     if (!user || !user.email || !user.id) {
       throw new Error("Unauthorized");
