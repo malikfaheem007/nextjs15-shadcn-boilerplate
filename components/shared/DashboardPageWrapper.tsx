@@ -4,7 +4,7 @@ import clsx from "clsx";
 import React from "react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 interface DashboardPageWrapperProps {
   type?: "button" | "submit";

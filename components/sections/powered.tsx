@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 
 const logos = [
   {

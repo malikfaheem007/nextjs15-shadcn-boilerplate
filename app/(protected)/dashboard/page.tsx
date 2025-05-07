@@ -1,4 +1,4 @@
-import DashboardPageWrapper from "@/components/DashboardPageWrapper";
+import DashboardPageWrapper from "@/components/shared/DashboardPageWrapper";
 
 export default async function DashboardPage() {
 

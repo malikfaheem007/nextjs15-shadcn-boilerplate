@@ -7,7 +7,7 @@ import { ModeToggle } from "@/components/layout/mode-toggle";
 import { NewsletterForm } from "../forms/newsletter-form";
 import { Icons } from "../shared/icons";
 import {footerLinks, siteConfig} from "@/config/site";
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   return (

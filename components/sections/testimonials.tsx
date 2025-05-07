@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { HeaderSection } from "@/components/shared/header-section";
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 import {testimonials} from "@/config/landing";
 
 export default function Testimonials() {

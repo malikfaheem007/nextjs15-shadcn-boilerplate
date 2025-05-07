@@ -1,4 +1,4 @@
-import { getUserOrganizations } from "@/app/actions/organizations";
+import { getUserOrganizations } from "@/actions/organizations";
 import SelectOrganization from "@/app/(auth)/select-organization/SelectOrganization";
 
 async function SelectOrganizationPage() {

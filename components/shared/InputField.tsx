@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
-import { cn } from "../lib/utils";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+import { cn } from "../../lib/utils";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 
-// Define the props for InputWithLabel including ref forwarding
+// Define the props for InputField including ref forwarding
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputClassName?: string;
   label?: string;
@@ -12,10 +12,10 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 // Use forwardRef to pass the ref to the input
-export const InputWithLabel = forwardRef<HTMLInputElement, InputProps>(
+const InputField = forwardRef<HTMLInputElement, InputProps>(
   ({ helperText, label, hasError, ...props }, ref) => {
     return (
-      <div className="w-full">
+      <div>
         {label && (
           <Label htmlFor={props.id} className="mb-2.5 inline-block font-medium">
             {label}
@@ -38,4 +38,6 @@ export const InputWithLabel = forwardRef<HTMLInputElement, InputProps>(
 );
 
 // Set the display name for debugging purposes
-InputWithLabel.displayName = "InputWithLabel";
+InputField.displayName = "InputField";
+
+export default InputField;

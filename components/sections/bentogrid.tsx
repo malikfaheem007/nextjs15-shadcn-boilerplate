@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 
 export default function BentoGrid() {
   return (

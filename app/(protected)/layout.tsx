@@ -9,9 +9,9 @@ import {
 import { ModeToggle } from "@/components/layout/mode-toggle";
 import { UserAccountNav } from "@/components/layout/user-account-nav";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
-import {getCurrentUser} from "@/app/actions/user";
-import {getUserOrganizations} from "@/app/actions/organizations";
-import Container from "@/components/Container";
+import {getCurrentUser} from "@/actions/user";
+import {getUserOrganizations} from "@/actions/organizations";
+import Container from "@/components/shared/Container";
 
 interface ProtectedLayoutProps {
     children: React.ReactNode;

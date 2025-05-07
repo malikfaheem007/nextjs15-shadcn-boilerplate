@@ -6,7 +6,7 @@ import { Building, Plus } from "lucide-react";
 import {
   createOrganization,
   setCurrentOrgId,
-} from "@/app/actions/organizations";
+} from "@/actions/organizations";
 import {
   Card,
   CardContent,

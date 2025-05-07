@@ -20,7 +20,7 @@ import { BLOG_CATEGORIES } from "@/config/blog";
 import Author from "@/components/content/author";
 import { allPosts } from "@/.contentlayer/generated";
 import { Mdx } from "@/components/content/mdx-components";
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 
 export async function generateStaticParams() {
   return allPosts.map((post) => ({

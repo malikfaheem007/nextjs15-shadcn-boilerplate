@@ -8,7 +8,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { HeaderSection } from "@/components/shared/header-section";
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 
 export function ComparePlans() {
   const renderCell = (value: string | boolean | null) => {

@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { HeaderSection } from "@/components/shared/header-section";
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 
 export default function Loading() {
   return (

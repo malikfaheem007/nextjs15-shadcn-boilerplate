@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { useScroll } from "@/hooks/use-scroll";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/shared/icons";
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 
 interface NavBarProps {
   scroll?: boolean;

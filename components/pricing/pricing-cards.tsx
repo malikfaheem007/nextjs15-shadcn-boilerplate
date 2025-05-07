@@ -12,7 +12,7 @@ import { HeaderSection } from "@/components/shared/header-section";
 import { Icons } from "@/components/shared/icons";
 import {useRouter} from "next/navigation";
 import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group";
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 
 interface PricingCardsProps {
   userId?: string;

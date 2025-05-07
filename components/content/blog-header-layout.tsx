@@ -8,7 +8,7 @@ import { Drawer } from "vaul";
 
 import { BLOG_CATEGORIES } from "@/config/blog";
 import { cn } from "@/lib/utils";
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 
 export function BlogHeaderLayout() {
   const [open, setOpen] = useState(false);

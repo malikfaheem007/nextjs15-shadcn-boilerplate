@@ -11,7 +11,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import {Organization} from "@/types/common";
-import {LoadingButton} from "@/components/LoadingButton";
+import {LoadingButton} from "@/components/shared/LoadingButton";
 import {useRouter} from "next/navigation";
 
 export default function ProjectSwitcher(

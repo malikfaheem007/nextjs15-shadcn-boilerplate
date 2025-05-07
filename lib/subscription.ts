@@ -1,6 +1,6 @@
 import { pricingData } from "@/config/subscriptions";
 import { stripe } from "@/lib/stripe";
-import {getCurrentOrganization, getCurrentOrgId} from "@/app/actions/organizations";
+import {getCurrentOrganization, getCurrentOrgId} from "@/actions/organizations";
 import {UserSubscriptionPlan} from "@/types";
 
 export async function getUserSubscriptionPlan(

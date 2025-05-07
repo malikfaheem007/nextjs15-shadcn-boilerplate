@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/accordion";
 
 import { HeaderSection } from "../shared/header-section";
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 
 const pricingFaqData = [
   {

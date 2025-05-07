@@ -1,14 +1,14 @@
 import * as React from "react";
-import { Check, X, ChevronsUpDown, Loader } from "lucide-react";
+import { Check, X, ChevronsUpDown } from "lucide-react";
 
 import { CommandList } from "cmdk";
-import { cn } from "../lib/utils";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Label } from "./ui/label";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { Command, CommandEmpty, CommandInput, CommandItem } from "./ui/command";
-import { LoadingSpinner } from "./LoadingSpinner";
+import { cn } from "../../lib/utils";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import { Command, CommandEmpty, CommandInput, CommandItem } from "../ui/command";
+import {CircularLoader} from "@/components/shared/CircularLoader";
 
 export type OptionType = {
   label: string;
@@ -98,7 +98,7 @@ function MultiSelect({
             <CommandEmpty>
               {isLoading ? (
                 <div className="flex justify-center">
-                  <LoadingSpinner />
+                  <CircularLoader />
                 </div>
               ) : (
                 "No items found"

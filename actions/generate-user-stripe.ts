@@ -4,7 +4,7 @@ import { stripe } from "@/lib/stripe";
 import { getUserSubscriptionPlan } from "@/lib/subscription";
 import { absoluteUrl } from "@/lib/utils";
 import { redirect } from "next/navigation";
-import {getCurrentUser} from "@/app/actions/user";
+import {getCurrentUser} from "@/actions/user";
 
 export type responseAction = {
   status: "success" | "error";

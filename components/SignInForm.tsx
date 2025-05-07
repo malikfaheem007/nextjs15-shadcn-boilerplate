@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { loginAction } from "@/app/actions/login-action";
+import { loginAction } from "@/actions/login-action";
 
 type SignInFormValues = {
   email: string;
