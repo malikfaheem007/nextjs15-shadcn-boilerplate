@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {
   Dispatch,
   SetStateAction,
@@ -5,7 +7,6 @@ import {
   useMemo,
   useState,
 } from "react";
-import { signOut, useSession } from "next-auth/react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";

@@ -6,7 +6,7 @@ import { constructMetadata } from "@/lib/utils";
 import { ComparePlans } from "@/components/pricing/compare-plans";
 import { PricingCards } from "@/components/pricing/pricing-cards";
 import { PricingFaq } from "@/components/pricing/pricing-faq";
-import {getCurrentUser} from "@/app/actions/user";
+import { getCurrentUser } from "@/app/actions/user";
 
 export const metadata = constructMetadata({
   title: "Pricing – SaaS Starter",

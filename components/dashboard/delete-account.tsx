@@ -1,11 +1,10 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/button";
 import { SectionColumns } from "@/components/dashboard/section-columns";
 import { useDeleteAccountModal } from "@/components/modals/delete-account-modal";
 import { Icons } from "@/components/shared/icons";
-import { siteConfig } from "../config/site";
+import { siteConfig } from "@/config/site";
 
 export function DeleteAccountSection() {
   const { setShowDeleteAccountModal, DeleteAccountModal } =

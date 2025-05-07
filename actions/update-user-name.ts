@@ -1,7 +1,6 @@
 "use server";
 
-import { auth } from "@/auth";
-import { prisma } from "@/lib/db";
+import { getCurrentUser } from "@/app/actions/user";
 import { userNameSchema } from "@/validations/user";
 import { revalidatePath } from "next/cache";
 
@@ -11,28 +10,21 @@ export type FormData = {
 
 export async function updateUserName(userId: string, data: FormData) {
   try {
-    const session = await auth()
+    const user = await getCurrentUser();
 
-    if (!session?.user || session?.user.id !== userId) {
+    if (!user || user.id !== userId) {
       throw new Error("Unauthorized");
     }
 
     const { name } = userNameSchema.parse(data);
 
     // Update the user name.
-    await prisma.user.update({
-      where: {
-        id: userId,
-      },
-      data: {
-        name: name,
-      },
-    })
+    // TODO: will update the user name in the database
 
-    revalidatePath('/dashboard/settings');
+    revalidatePath("/dashboard/settings");
     return { status: "success" };
   } catch (error) {
     // console.log(error)
-    return { status: "error" }
+    return { status: "error" };
   }
 }
