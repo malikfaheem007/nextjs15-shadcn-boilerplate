@@ -3,8 +3,6 @@
 import { useState, useTransition } from "react";
 import { updateUserRole, type FormData } from "@/actions/update-user-role";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User, UserRole } from "@prisma/client";
-import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -30,16 +28,15 @@ import { SectionColumns } from "@/components/dashboard/section-columns";
 import { Icons } from "@/components/shared/icons";
 
 interface UserNameFormProps {
-  user: Pick<User, "id" | "role">;
+  user: any;
 }
 
 export function UserRoleForm({ user }: UserNameFormProps) {
-  const { update } = useSession();
   const [updated, setUpdated] = useState(false);
   const [isPending, startTransition] = useTransition();
   const updateUserRoleWithId = updateUserRole.bind(null, user.id);
 
-  const roles = Object.values(UserRole);
+  const roles: string[] = [];
   const [role, setRole] = useState(user.role);
 
   const form = useForm<FormData>({
@@ -58,7 +55,7 @@ export function UserRoleForm({ user }: UserNameFormProps) {
           description: "Your role was not updated. Please try again.",
         });
       } else {
-        await update();
+        // TODO -- add update logic
         setUpdated(false);
         toast.success("Your role has been updated.");
       }
@@ -81,7 +78,7 @@ export function UserRoleForm({ user }: UserNameFormProps) {
                   <FormLabel className="sr-only">Role</FormLabel>
                   <Select
                     // TODO:(FIX) Option value not update. Use useState for the moment
-                    onValueChange={(value: UserRole) => {
+                    onValueChange={(value: string) => {
                       setUpdated(user.role !== value);
                       setRole(value);
                       // field.onChange;
@@ -108,7 +105,6 @@ export function UserRoleForm({ user }: UserNameFormProps) {
             />
             <Button
               type="submit"
-              variant={updated ? "default" : "disable"}
               disabled={isPending || !updated}
               className="w-[67px] shrink-0 px-0 sm:w-[130px]"
             >

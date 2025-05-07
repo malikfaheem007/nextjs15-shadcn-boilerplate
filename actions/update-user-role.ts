@@ -1,35 +1,26 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { auth } from "@/auth";
-import { UserRole } from "@prisma/client";
 
-import { prisma } from "@/lib/db";
 import { userRoleSchema } from "@/validations/user";
+import { getCurrentUser } from "@/app/actions/user";
 
 export type FormData = {
-  role: UserRole;
+  role: any;
 };
 
 export async function updateUserRole(userId: string, data: FormData) {
   try {
-    const session = await auth();
+    const user = await getCurrentUser();
 
-    if (!session?.user || session?.user.id !== userId) {
+    if (!user || user.id !== userId) {
       throw new Error("Unauthorized");
     }
 
     const { role } = userRoleSchema.parse(data);
 
     // Update the user role.
-    await prisma.user.update({
-      where: {
-        id: userId,
-      },
-      data: {
-        role: role,
-      },
-    });
+    // TODO: will update the user role in the database
 
     revalidatePath("/dashboard/settings");
     return { status: "success" };
