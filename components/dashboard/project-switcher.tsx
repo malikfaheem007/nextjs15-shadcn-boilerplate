@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { Check, ChevronsUpDown, Plus } from "lucide-react";
-import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -31,7 +29,7 @@ export default function ProjectSwitcher(
 
     async function handleSwitchOrg(orgId: string) {
         setLoading(true);
-        await fetch('/api/set-current-org', {
+        await fetch(`/api/organizations/${orgId}/set-current-org`, {
             method: 'POST',
             body: JSON.stringify({ orgId }),
         });
