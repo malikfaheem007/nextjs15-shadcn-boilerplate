@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 
 import { userRoleSchema } from "@/validations/user";
-import { getCurrentUser } from "@/app/actions/user";
+import {getCurrentUser} from "@/actions/user";
 
 export type FormData = {
   role: any;

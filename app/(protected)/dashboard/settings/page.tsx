@@ -5,7 +5,7 @@ import { DeleteAccountSection } from "@/components/dashboard/delete-account";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { UserNameForm } from "@/components/forms/user-name-form";
 import { UserRoleForm } from "@/components/forms/user-role-form";
-import { getCurrentUser } from "@/app/actions/user";
+import {getCurrentUser} from "@/actions/user";
 
 export const metadata = constructMetadata({
   title: "Settings – SaaS Starter",

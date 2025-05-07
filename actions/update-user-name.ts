@@ -1,8 +1,8 @@
 "use server";
 
-import { getCurrentUser } from "@/app/actions/user";
 import { userNameSchema } from "@/validations/user";
 import { revalidatePath } from "next/cache";
+import {getCurrentUser} from "@/actions/user";
 
 export type FormData = {
   name: string;
