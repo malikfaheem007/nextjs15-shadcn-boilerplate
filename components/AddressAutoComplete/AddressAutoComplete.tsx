@@ -1,9 +1,9 @@
 "use client"
 import {Label} from "@/components/ui/label";
 import {Controller, useForm} from "react-hook-form";
-import InputField from "@/components/InputField";
+import InputField from "@/components/shared/InputField";
 import {Button} from "@/components/ui/button";
-import {LoadingButton} from "@/components/LoadingButton";
+import {LoadingButton} from "@/components/shared/LoadingButton";
 import {AddressValidationDTO, addressValidationSchema} from "@/components/AddressAutoComplete/address-validation";
 import {zodResolver} from '@hookform/resolvers/zod';
 import AddressAutoCompleteInput from "@/components/AddressAutoComplete/AddressAutoCompleteInput";

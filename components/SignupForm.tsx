@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
-import { signupAction } from "@/app/actions/signup-action";
+import { signupAction } from "@/actions/signup-action";
 
 type SignUpFormValues = {
   email: string;
