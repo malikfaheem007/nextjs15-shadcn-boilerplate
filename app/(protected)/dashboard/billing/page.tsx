@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { BillingInfo } from "@/components/pricing/billing-info";
 import { Icons } from "@/components/shared/icons";
-import { getCurrentUser } from "@/app/actions/user";
+import { getCurrentUser } from "@/actions/user";
 
 export const metadata = constructMetadata({
   title: "Billing – SaaS Starter",

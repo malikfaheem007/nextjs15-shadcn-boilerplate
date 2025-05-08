@@ -1,27 +1,33 @@
 "use client";
 
 import * as React from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Icons } from "@/components/shared/icons";
 import { userAuthSchema } from "@/validations/auth";
+import { InputWithLabel } from "../shared/InputWithLabel";
+import { LoadingButton } from "../shared/LoadingButton";
+import { loginAction } from "@/actions/login-action";
+import { registerAction } from "@/actions/register-action";
+import TextSeparator from "../shared/TextSeparator";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
-  type?: string;
+  type?: "register" | "login";
 }
 
 type FormData = z.infer<typeof userAuthSchema>;
 
-export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
+export function UserAuthForm({
+  className,
+  type = "login",
+  ...props
+}: UserAuthFormProps) {
   const {
     register,
     handleSubmit,
@@ -29,90 +35,131 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
   } = useForm<FormData>({
     resolver: zodResolver(userAuthSchema),
   });
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [isGoogleLoading, setIsGoogleLoading] = React.useState<boolean>(false);
+
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = React.useState(false);
+  const router = useRouter();
   const searchParams = useSearchParams();
 
   async function onSubmit(data: FormData) {
     setIsLoading(true);
-
-    const signInResult = await signIn("resend", {
-      email: data.email.toLowerCase(),
-      redirect: false,
-      callbackUrl: searchParams?.get("from") || "/dashboard",
-    });
-
-    setIsLoading(false);
-
-    if (!signInResult?.ok) {
-      return toast.error("Something went wrong.", {
-        description: "Your sign in request failed. Please try again.",
+    try {
+      if (type === "register") {
+        await registerAction(
+          data.email,
+          data.password,
+          data.firstName,
+          data.lastName
+        );
+        console.log("Registered user:", {
+          email: data.email,
+          password: data.password,
+          firstName: data.firstName,
+          lastName: data.lastName,
+        });
+        toast.success("Account created! Please check your email to verify.");
+        router.push("/login");
+        return;
+      } else {
+        await loginAction(data.email, data.password);
+        router.push("/select-organization");
+      }
+    } catch (error: any) {
+      console.error(`${type} error:`, error);
+      toast.error(`${type === "register" ? "Registration" : "Login"} failed`, {
+        description: error?.message || "An unexpected error occurred.",
       });
+    } finally {
+      setIsLoading(false);
     }
-
-    return toast.success("Check your email", {
-      description: "We sent you a login link. Be sure to check your spam too.",
-    });
+    console.log("Login succeeded for", data.email, data.password);
   }
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-2">
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              Email
-            </Label>
-            <Input
-              id="email"
-              placeholder="name@example.com"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              disabled={isLoading || isGoogleLoading}
-              {...register("email")}
-            />
-            {errors?.email && (
-              <p className="px-1 text-xs text-red-600">
-                {errors.email.message}
-              </p>
-            )}
+      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+        {type === "register" && (
+          <div className="flex gap-4">
+            <div className="w-1/2">
+              <InputWithLabel
+                label="First Name"
+                id="firstName"
+                placeholder="John"
+                disabled={isLoading || isGoogleLoading}
+                aria-invalid={!!errors?.firstName}
+                aria-describedby="firstName-error"
+                {...register("firstName", {
+                  required: "First name is required",
+                })}
+                hasError={!!errors?.firstName}
+                helperText={errors?.firstName?.message || ""}
+              />
+            </div>
+
+            <div className="w-1/2">
+              <InputWithLabel
+                label="Last Name"
+                id="lastName"
+                placeholder="Doe"
+                disabled={isLoading || isGoogleLoading}
+                aria-invalid={!!errors?.lastName}
+                aria-describedby="lastName-error"
+                {...register("lastName", { required: "Last name is required" })}
+                hasError={!!errors?.lastName}
+                helperText={errors?.lastName?.message || ""}
+              />
+            </div>
           </div>
-          <button className={cn(buttonVariants())} disabled={isLoading}>
-            {isLoading && (
-              <Icons.spinner className="mr-2 size-4 animate-spin" />
-            )}
-            {type === "register" ? "Sign Up with Email" : "Sign In with Email"}
-          </button>
-        </div>
+        )}
+
+        <InputWithLabel
+          label="Email"
+          id="email"
+          placeholder="name@example.com"
+          type="email"
+          autoCapitalize="none"
+          autoComplete="email"
+          autoCorrect="off"
+          disabled={isLoading || isGoogleLoading}
+          aria-invalid={!!errors?.email}
+          aria-describedby="email-error"
+          {...register("email")}
+          hasError={!!errors?.email}
+          helperText={errors?.email?.message || ""}
+        />
+
+        <InputWithLabel
+          label="Password"
+          id="password"
+          type="password"
+          placeholder="********"
+          disabled={isLoading || isGoogleLoading}
+          aria-invalid={!!errors?.password}
+          aria-describedby="password-error"
+          {...register("password")}
+          hasError={!!errors?.password}
+          helperText={errors?.password?.message || ""}
+        />
+
+        <LoadingButton loading={isLoading}>
+          {type === "register" ? "Sign Up with Email" : "Sign In with Email"}
+        </LoadingButton>
       </form>
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
-          </span>
-        </div>
-      </div>
-      <button
+
+      <TextSeparator>Or continue with</TextSeparator>
+
+      <Button
         type="button"
-        className={cn(buttonVariants({ variant: "outline" }))}
-        onClick={() => {
-          setIsGoogleLoading(true);
-          signIn("google");
-        }}
+        variant="outline"
         disabled={isLoading || isGoogleLoading}
       >
         {isGoogleLoading ? (
           <Icons.spinner className="mr-2 size-4 animate-spin" />
         ) : (
           <Icons.google className="mr-2 size-4" />
-        )}{" "}
+        )}
         Google
-      </button>
+      </Button>
     </div>
   );
 }

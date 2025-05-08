@@ -3,10 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Building, Plus } from "lucide-react";
-import {
-  createOrganization,
-  setCurrentOrgId,
-} from "@/actions/organizations";
+import { createOrganization, setCurrentOrgId } from "@/actions/organizations";
 import {
   Card,
   CardContent,
@@ -18,6 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import TextSeparator from "@/components/shared/TextSeparator";
+import { InputWithLabel } from "@/components/shared/InputWithLabel";
 
 interface Organization {
   id: string;
@@ -73,21 +72,25 @@ export default function SelectOrganization({
             </div>
           )}
 
-          <Separator className="my-4" />
-
+          <div className="py-2.5">
+            <TextSeparator>Or</TextSeparator>
+          </div>
           <div className="space-y-3">
-            <h3 className="text-sm font-medium">Or create a new one</h3>
-            <div className="space-y-2">
-              <Input
-                placeholder="Organization name"
-                value={newOrgName}
-                onChange={(e) => setNewOrgName(e.target.value)}
-              />
-              <Button onClick={handleCreateOrg} disabled={!newOrgName.trim()}>
-                <Plus className="h-4 w-4" />
-                Create
-              </Button>
-            </div>
+            <InputWithLabel
+              label="New Organization"
+              placeholder="Organization name"
+              value={newOrgName}
+              onChange={(e) => setNewOrgName(e.target.value)}
+            />
+
+            <Button
+              onClick={handleCreateOrg}
+              disabled={!newOrgName.trim()}
+              className="w-full"
+            >
+              <Plus className="h-4 w-4" />
+              Create
+            </Button>
           </div>
         </CardContent>
         <CardFooter className="text-xs text-muted-foreground text-center">

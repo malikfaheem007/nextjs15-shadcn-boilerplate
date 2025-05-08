@@ -1,8 +1,6 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 
 export async function loginAction(email: string, password: string) {
   const supabase = await createClient();
@@ -13,9 +11,8 @@ export async function loginAction(email: string, password: string) {
   });
 
   if (error) {
-    redirect("/error");
+    throw new Error(error.message);
   }
 
-  revalidatePath("/", "layout");
-  redirect("/select-organization");
+  return { success: true };
 }

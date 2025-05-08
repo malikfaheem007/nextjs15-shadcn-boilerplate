@@ -10,12 +10,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {Organization} from "@/types/common";
-import {LoadingButton} from "@/components/shared/LoadingButton";
-import {useRouter} from "next/navigation";
+import { Organization } from "@/types/common";
+import { LoadingButton } from "@/components/shared/LoadingButton";
+import { useRouter } from "next/navigation";
 
-export default function ProjectSwitcher(
-    {
+export default function ProjectSwitcher({
   large = false,
   organizations,
   currentOrgId,
@@ -24,21 +23,21 @@ export default function ProjectSwitcher(
   organizations: Organization[];
   currentOrgId: string;
 }) {
-    const router = useRouter();
-    const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
-    async function handleSwitchOrg(orgId: string) {
-        setLoading(true);
-        await fetch(`/api/organizations/${orgId}/set-current-org`, {
-            method: 'POST',
-            body: JSON.stringify({ orgId }),
-        });
-        router.refresh(); // reload the page/server components
-    }
+  async function handleSwitchOrg(orgId: string) {
+    setLoading(true);
+    await fetch(`/api/organizations/${orgId}/set-current-org`, {
+      method: "POST",
+      body: JSON.stringify({ orgId }),
+    });
+    router.refresh(); // reload the page/server components
+  }
 
   const [openPopover, setOpenPopover] = useState(false);
 
-  const selectedOrg = organizations?.find(org => org.id === currentOrgId);
+  const selectedOrg = organizations?.find((org) => org.id === currentOrgId);
 
   if (!organizations || !selectedOrg) {
     return <ProjectSwitcherPlaceholder />;
@@ -56,16 +55,13 @@ export default function ProjectSwitcher(
           >
             <div className="flex items-center space-x-3 pr-2">
               <div
-                className={cn(
-                  "size-3 shrink-0 rounded-full",
-                    "bg-blue-500",
-                )}
+                className={cn("size-3 shrink-0 rounded-full", "bg-blue-500")}
               />
               <div className="flex items-center space-x-3">
                 <span
                   className={cn(
                     "inline-block truncate text-sm font-medium xl:max-w-[120px]",
-                    large ? "w-full" : "max-w-[80px]",
+                    large ? "w-full" : "max-w-[80px]"
                   )}
                 >
                   {selectedOrg.name}
@@ -95,7 +91,7 @@ function ProjectList({
   selected,
   organizations,
   setOpenPopover,
-    handleSwitchOrg,
+  handleSwitchOrg,
 }: {
   selected: Organization;
   organizations: Organization[];
@@ -107,21 +103,19 @@ function ProjectList({
       {organizations.map(({ id, name }) => (
         <Button
           key={id}
+          variant="ghost"
           className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "relative flex h-9 items-center gap-3 p-3 text-muted-foreground hover:text-foreground",
+            "relative flex h-9 items-center gap-3 p-3 text-muted-foreground hover:text-foreground"
           )}
           onClick={() => {
-            setOpenPopover(false)
+            setOpenPopover(false);
             handleSwitchOrg(id);
           }}
         >
           <div className={cn("size-3 shrink-0 rounded-full", "bg-blue-500")} />
           <span
             className={`flex-1 truncate text-sm ${
-              selected.id === id
-                ? "font-medium text-foreground"
-                : "font-normal"
+              selected.id === id ? "font-medium text-foreground" : "font-normal"
             }`}
           >
             {name}
