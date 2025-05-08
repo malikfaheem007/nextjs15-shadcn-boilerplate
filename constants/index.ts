@@ -4,3 +4,4 @@ export enum UserRoles {
 }
 
 export const TERMS_OF_SERVICE_PAGE = "https://www.example.com/terms-of-service";
+export const APP_NAME = "SaaS Starter";

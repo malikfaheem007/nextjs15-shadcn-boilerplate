@@ -51,12 +51,6 @@ export function UserAuthForm({
           data.firstName,
           data.lastName
         );
-        console.log("Registered user:", {
-          email: data.email,
-          password: data.password,
-          firstName: data.firstName,
-          lastName: data.lastName,
-        });
         toast.success("Account created! Please check your email to verify.");
         router.push("/login");
         return;
@@ -132,7 +126,11 @@ export function UserAuthForm({
           label="Password"
           id="password"
           type="password"
-          placeholder="********"
+          placeholder={
+            type === "register" ? "Create a password" : "Enter your password"
+          }
+          showPasswordToggle
+          {...register("password")}
           disabled={isLoading || isGoogleLoading}
           aria-invalid={!!errors?.password}
           aria-describedby="password-error"
@@ -140,6 +138,35 @@ export function UserAuthForm({
           hasError={!!errors?.password}
           helperText={errors?.password?.message || ""}
         />
+
+        {type === "register" && (
+          <InputWithLabel
+            label="Confirm Password"
+            id="confirmPassword"
+            type="password"
+            placeholder="Re-enter your password"
+            disabled={isLoading || isGoogleLoading}
+            aria-invalid={!!errors?.confirmPassword}
+            aria-describedby="confirmPassword-error"
+            showPasswordToggle
+            {...register("confirmPassword", {
+              required: "Please confirm your password",
+            })}
+            hasError={!!errors?.confirmPassword}
+            helperText={errors?.confirmPassword?.message || ""}
+          />
+        )}
+
+        {type === "login" && (
+          <div className="text-right text-sm">
+            <a
+              href="/reset-password"
+              className="text-muted-foreground underline underline-offset-4 hover:text-brand"
+            >
+              Forgot password?
+            </a>
+          </div>
+        )}
 
         <LoadingButton loading={isLoading}>
           {type === "register" ? "Sign Up with Email" : "Sign In with Email"}

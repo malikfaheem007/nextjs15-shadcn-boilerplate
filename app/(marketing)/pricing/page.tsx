@@ -7,11 +7,13 @@ import { ComparePlans } from "@/components/pricing/compare-plans";
 import { PricingCards } from "@/components/pricing/pricing-cards";
 import { PricingFaq } from "@/components/pricing/pricing-faq";
 import { getCurrentUser } from "@/actions/user";
+import { Metadata } from "next";
+import { APP_NAME } from "@/constants";
 
-export const metadata = constructMetadata({
-  title: "Pricing – SaaS Starter",
-  description: "Explore our subscription plans.",
-});
+export const metadata: Metadata = {
+  title: `Pricing | ${APP_NAME}`,
+  description: "Compare plans and find the right option for your needs",
+};
 
 export default async function PricingPage() {
   const user = await getCurrentUser();

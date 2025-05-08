@@ -1,12 +1,13 @@
 import { BlogPosts } from "@/components/content/blog-posts";
-import { constructMetadata, getBlurDataURL } from "@/lib/utils";
+import { getBlurDataURL } from "@/lib/utils";
 import { allPosts } from "@/.contentlayer/generated";
+import { APP_NAME } from "@/constants";
+import { Metadata } from "next";
 
-export const metadata = constructMetadata({
-  title: "Blog – SaaS Starter",
-  description: "Latest news and updates from Next SaaS Starter.",
-});
-
+export const metadata: Metadata = {
+  title: `Blog | ${APP_NAME}`,
+  description: "Read the latest news, updates, and insights from our team",
+};
 
 export default async function BlogPage() {
   const posts = await Promise.all(

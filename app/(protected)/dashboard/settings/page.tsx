@@ -1,16 +1,17 @@
 import { redirect } from "next/navigation";
 
-import { constructMetadata } from "@/lib/utils";
 import { DeleteAccountSection } from "@/components/dashboard/delete-account";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { UserNameForm } from "@/components/forms/user-name-form";
 import { UserRoleForm } from "@/components/forms/user-role-form";
-import {getCurrentUser} from "@/actions/user";
+import { getCurrentUser } from "@/actions/user";
+import { APP_NAME } from "@/constants";
+import { Metadata } from "next";
 
-export const metadata = constructMetadata({
-  title: "Settings – SaaS Starter",
-  description: "Configure your account and website settings.",
-});
+export const metadata: Metadata = {
+  title: `Settings | ${APP_NAME}`,
+  description: "Manage your preferences and account settings",
+};
 
 export default async function SettingsPage() {
   const user = await getCurrentUser();

@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import TextSeparator from "@/components/shared/TextSeparator";
 import { InputWithLabel } from "@/components/shared/InputWithLabel";
+import { Icons } from "@/components/shared/icons";
 
 interface Organization {
   id: string;
@@ -48,6 +49,8 @@ export default function SelectOrganization({
     <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4 dark:bg-gray-900">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
+          <Icons.logo className="mx-auto" />
+
           <CardTitle className="text-2xl font-bold">
             Select an Organization
           </CardTitle>

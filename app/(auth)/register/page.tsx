@@ -1,15 +1,17 @@
-import Link from "next/link"
+import Link from "next/link";
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/shared/icons"
-import { UserAuthForm } from "@/components/forms/user-auth-form"
-import { Suspense } from "react"
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { Icons } from "@/components/shared/icons";
+import { UserAuthForm } from "@/components/forms/user-auth-form";
+import { Suspense } from "react";
+import { Metadata } from "next";
+import { APP_NAME } from "@/constants";
 
-export const metadata = {
-  title: "Create an account",
-  description: "Create an account to get started.",
-}
+export const metadata: Metadata = {
+  title: `Register | ${APP_NAME}`,
+  description: "Create a new account to get started",
+};
 
 export default function RegisterPage() {
   return (
@@ -58,5 +60,5 @@ export default function RegisterPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
