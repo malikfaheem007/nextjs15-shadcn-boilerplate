@@ -22,7 +22,7 @@ export async function registerAction(
   });
 
   if (error) {
-    throw new Error(error.message);
+    throw error;
   }
 
   return { success: true };

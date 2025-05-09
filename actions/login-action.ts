@@ -11,7 +11,7 @@ export async function loginAction(email: string, password: string) {
   });
 
   if (error) {
-    throw new Error(error.message);
+    throw error;
   }
 
   return { success: true };

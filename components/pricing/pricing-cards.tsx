@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import {SubscriptionPlan, UserSubscriptionPlan} from "@/types";
+import { SubscriptionPlan, UserSubscriptionPlan } from "@/types";
 
 import { pricingData } from "@/config/subscriptions";
 import { cn } from "@/lib/utils";
@@ -10,8 +10,8 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { BillingFormButton } from "@/components/forms/billing-form-button";
 import { HeaderSection } from "@/components/shared/header-section";
 import { Icons } from "@/components/shared/icons";
-import {useRouter} from "next/navigation";
-import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group";
+import { useRouter } from "next/navigation";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import Container from "@/components/shared/Container";
 
 interface PricingCardsProps {
@@ -29,7 +29,7 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
   };
 
   const PricingCard = ({ offer }: { offer: SubscriptionPlan }) => {
-    const router = useRouter()
+    const router = useRouter();
 
     return (
       <div
@@ -37,7 +37,7 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
           "relative flex flex-col overflow-hidden rounded-3xl border shadow-sm",
           offer.title.toLocaleLowerCase() === "pro"
             ? "-m-0.5 border-2 border-purple-400"
-            : "",
+            : ""
         )}
         key={offer.title}
       >
@@ -103,7 +103,7 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
                   buttonVariants({
                     variant: "outline",
                   }),
-                  "w-full",
+                  "w-full"
                 )}
               >
                 Go to dashboard

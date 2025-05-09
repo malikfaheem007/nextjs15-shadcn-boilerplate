@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {useRouter, useSelectedLayoutSegment} from "next/navigation";
+import { useRouter, useSelectedLayoutSegment } from "next/navigation";
 
 import { marketingConfig } from "@/config/marketing";
 import { siteConfig } from "@/config/site";
@@ -14,7 +14,7 @@ import Container from "@/components/shared/Container";
 interface NavBarProps {
   scroll?: boolean;
   large?: boolean;
-  user: any // TODO
+  user: any; // TODO
 }
 
 export function NavBar({ scroll = false, user }: NavBarProps) {
@@ -30,9 +30,7 @@ export function NavBar({ scroll = false, user }: NavBarProps) {
         scroll ? (scrolled ? "border-b" : "bg-transparent") : "border-b"
       }`}
     >
-      <Container
-        className="flex h-14 items-center justify-between py-4"
-      >
+      <Container className="flex h-14 items-center justify-between py-4">
         <div className="flex gap-6 md:gap-10">
           <Link href="/" className="flex items-center space-x-1.5">
             <Icons.logo />
@@ -53,7 +51,7 @@ export function NavBar({ scroll = false, user }: NavBarProps) {
                     item.href.startsWith(`/${selectedLayout}`)
                       ? "text-foreground"
                       : "text-foreground/60",
-                    item.disabled && "cursor-not-allowed opacity-80",
+                    item.disabled && "cursor-not-allowed opacity-80"
                   )}
                 >
                   {item.title}
@@ -69,22 +67,19 @@ export function NavBar({ scroll = false, user }: NavBarProps) {
               href={user.role === "ADMIN" ? "/admin" : "/dashboard"}
               className="hidden md:block"
             >
-              <Button
-                className="gap-2 px-5"
-                size="lg"
-              >
+              <Button className="gap-2 px-5" size="lg">
                 <span>Dashboard</span>
               </Button>
             </Link>
           ) : (
-              <Button
-                  className="hidden gap-2 px-5 md:flex"
-                  size="lg"
-                  onClick={() => router.push("/login")}
-              >
-                <span>Sign In</span>
-                <Icons.arrowRight className="size-4" />
-              </Button>
+            <Button
+              className="hidden gap-2 px-5 md:flex"
+              size="lg"
+              onClick={() => router.push("/login")}
+            >
+              <span>Sign In</span>
+              <Icons.arrowRight className="size-4" />
+            </Button>
           )}
         </div>
       </Container>
