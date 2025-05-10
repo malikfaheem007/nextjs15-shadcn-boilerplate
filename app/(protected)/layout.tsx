@@ -10,6 +10,7 @@ import { ModeToggle } from "@/components/layout/mode-toggle";
 import { UserAccountNav } from "@/components/layout/user-account-nav";
 import { getCurrentUser } from "@/actions/user";
 import { getUserOrganizations } from "@/actions/organizations";
+import Container from "@/components/shared/Container";
 
 interface ProtectedLayoutProps {
   children: React.ReactNode;
@@ -46,7 +47,7 @@ export default async function Dashboard({ children }: ProtectedLayoutProps) {
       <div className="flex flex-1 flex-col">
         {/* Header */}
         <header className="sticky top-0 z-50 bg-background border-b border-border">
-          <div className="mx-auto w-full max-w-7xl px-4 xl:px-8 flex items-center justify-between h-14 lg:h-[60px]">
+          <Container className="flex items-center justify-between h-14 lg:h-[60px] space-x-4">
             <MobileSheetSidebar
               currentOrgId={current_org_id}
               organizations={organizations}
@@ -59,7 +60,7 @@ export default async function Dashboard({ children }: ProtectedLayoutProps) {
               <ModeToggle />
               <UserAccountNav />
             </div>
-          </div>
+          </Container>
         </header>
 
          {/*Page Content*/}
