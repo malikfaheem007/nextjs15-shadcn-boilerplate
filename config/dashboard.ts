@@ -1,5 +1,5 @@
-import {UserRoles} from "@/constants";
-import {SidebarNavItem} from "@/types/common";
+import { UserRoles } from "@/constants";
+import { SidebarNavItem } from "@/types/common";
 
 export const sidebarLinks: SidebarNavItem[] = [
   {

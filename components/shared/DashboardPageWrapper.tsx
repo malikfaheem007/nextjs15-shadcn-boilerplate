@@ -5,6 +5,7 @@ import React from "react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import Container from "@/components/shared/Container";
 
 interface DashboardPageWrapperProps {
   type?: "button" | "submit";
@@ -32,17 +33,18 @@ export default function DashboardPageWrapper({
   const router = useRouter();
 
   return (
-    <div className={clsx(className)}>
+    <Container className={clsx("space-y-4 lg:space-y-6 py-4 lg:py-6 xl:py-8", className)}>
       {onBack && (
         <Button type="button" variant="outline" onClick={() => router.back()}>
           <ArrowLeft size={16} /> Go Back
         </Button>
       )}
+      
       <div className="flex w-full flex-col gap-4">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             {title && (
-              <h1 className="font-heading text-2xl font-semibold">
+              <h1 className="font-heading text-2xl font-bold">
                 {title}
               </h1>
             )}
@@ -64,7 +66,7 @@ export default function DashboardPageWrapper({
           )}
         </div>
       </div>
-      <div className="mt-4 w-full min-w-0 sm:mt-6 lg:mt-10">{children}</div>
-    </div>
+      <div>{children}</div>
+    </Container>
   );
 }

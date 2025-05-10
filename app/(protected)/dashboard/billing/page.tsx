@@ -3,10 +3,10 @@ import { redirect } from "next/navigation";
 import { getUserSubscriptionPlan } from "@/lib/subscription";
 import { constructMetadata } from "@/lib/utils";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { DashboardHeader } from "@/components/dashboard/header";
 import { BillingInfo } from "@/components/pricing/billing-info";
 import { Icons } from "@/components/shared/icons";
 import { getCurrentUser } from "@/actions/user";
+import DashboardPageWrapper from "@/components/shared/DashboardPageWrapper";
 
 export const metadata = constructMetadata({
   title: "Billing – SaaS Starter",
@@ -24,11 +24,10 @@ export default async function BillingPage() {
   }
 
   return (
-    <>
-      <DashboardHeader
-        heading="Billing"
-        text="Manage billing and your subscription plan."
-      />
+    <DashboardPageWrapper
+      title="Billing"
+      text="Manage billing and your subscription plan."
+    >
       <div className="grid gap-8">
         <Alert className="!pl-14">
           <Icons.warning />
@@ -49,6 +48,6 @@ export default async function BillingPage() {
         </Alert>
         <BillingInfo userSubscriptionPlan={userSubscriptionPlan} />
       </div>
-    </>
+    </DashboardPageWrapper>
   );
 }
