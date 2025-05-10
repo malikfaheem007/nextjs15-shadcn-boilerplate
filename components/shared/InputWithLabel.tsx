@@ -1,19 +1,36 @@
-import React, { forwardRef } from "react";
+"use client";
+import React, { forwardRef, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+
 import { cn } from "../../lib/utils";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 
-// Define the props for InputWithLabel including ref forwarding
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputClassName?: string;
   label?: string;
   helperText?: string;
   hasError?: boolean;
+  showPasswordToggle?: boolean;
 }
 
-// Use forwardRef to pass the ref to the input
 export const InputWithLabel = forwardRef<HTMLInputElement, InputProps>(
-  ({ helperText, label, hasError, ...props }, ref) => {
+  (
+    {
+      helperText,
+      label,
+      type = "text",
+      hasError,
+      showPasswordToggle,
+      className,
+      ...props
+    },
+    ref
+  ) => {
+    const [show, setShow] = useState(false);
+
+    const isPasswordField = type === "password" && showPasswordToggle;
+
     return (
       <div className="w-full">
         {label && (
@@ -21,7 +38,25 @@ export const InputWithLabel = forwardRef<HTMLInputElement, InputProps>(
             {label}
           </Label>
         )}
-        <Input ref={ref} {...props} />
+        <div className="relative">
+          <Input
+            ref={ref}
+            type={isPasswordField ? (show ? "text" : "password") : type}
+            className={cn(className, isPasswordField && "pr-10")}
+            {...props}
+          />
+          {isPasswordField && (
+            <button
+              type="button"
+              onClick={() => setShow((prev) => !prev)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 focus:outline-none"
+              tabIndex={-1}
+            >
+              {show ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          )}
+        </div>
+
         {helperText && (
           <p
             className={cn(
@@ -37,5 +72,4 @@ export const InputWithLabel = forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-// Set the display name for debugging purposes
 InputWithLabel.displayName = "InputWithLabel";

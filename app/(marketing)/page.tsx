@@ -5,7 +5,15 @@ import InfoLanding from "@/components/sections/info-landing";
 import Powered from "@/components/sections/powered";
 import PreviewLanding from "@/components/sections/preview-landing";
 import Testimonials from "@/components/sections/testimonials";
-import {infos} from "@/config/landing";
+import { infos } from "@/config/landing";
+import { APP_NAME } from "@/constants";
+import { constructMetadata } from "@/lib/utils";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: `Welcome to ${APP_NAME} – Your Central Hub`,
+  description: "Explore features, track progress, and manage your workflow",
+};
 
 export default function IndexPage() {
   return (
@@ -15,7 +23,7 @@ export default function IndexPage() {
       <Powered />
       <BentoGrid />
       <InfoLanding data={infos[0]} reverse={true} />
-       <InfoLanding data={infos[1]} />
+      <InfoLanding data={infos[1]} />
       <Features />
       <Testimonials />
     </>
