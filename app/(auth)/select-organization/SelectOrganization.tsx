@@ -56,7 +56,7 @@ export default function SelectOrganization({
           </h1>
           {organizations.length > 0 && (
             <p className="text-sm text-muted-foreground">
-              "Choose an existing organization or create a new one"
+              Choose an existing organization or create a new one
             </p>
           )}
         </div>

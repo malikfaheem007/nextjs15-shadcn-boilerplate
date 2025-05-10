@@ -21,15 +21,19 @@ import {
 import ProjectSwitcher from "@/components/dashboard/project-switcher";
 import { UpgradeCard } from "@/components/dashboard/upgrade-card";
 import { Icons } from "@/components/shared/icons";
-import {SidebarNavItem} from "@/types/common";
+import { SidebarNavItem } from "@/types/common";
 
 interface DashboardSidebarProps {
   links: SidebarNavItem[];
   organizations: any[];
-  currentOrgId: string
+  currentOrgId: string;
 }
 
-export function DashboardSidebar({ links, organizations, currentOrgId, }: DashboardSidebarProps) {
+export function DashboardSidebar({
+  links,
+  organizations,
+  currentOrgId,
+}: DashboardSidebarProps) {
   const path = usePathname();
 
   // NOTE: Use this if you want save in local storage -- Credits: Hosna Qasmei
@@ -69,12 +73,17 @@ export function DashboardSidebar({ links, organizations, currentOrgId, }: Dashbo
           <aside
             className={cn(
               isSidebarExpanded ? "w-[220px] xl:w-[260px]" : "w-[68px]",
-              "hidden h-screen md:block",
+              "hidden h-screen md:block"
             )}
           >
             <div className="flex h-full max-h-screen flex-1 flex-col gap-2">
               <div className="flex h-14 items-center p-4 lg:h-[60px]">
-                {isSidebarExpanded ? <ProjectSwitcher currentOrgId={currentOrgId} organizations={organizations} /> : null}
+                {isSidebarExpanded ? (
+                  <ProjectSwitcher
+                    currentOrgId={currentOrgId}
+                    organizations={organizations}
+                  />
+                ) : null}
 
                 <Button
                   variant="ghost"
@@ -125,7 +134,7 @@ export function DashboardSidebar({ links, organizations, currentOrgId, }: Dashbo
                                     ? "bg-muted"
                                     : "text-muted-foreground hover:text-accent-foreground",
                                   item.disabled &&
-                                    "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-muted-foreground",
+                                    "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-muted-foreground"
                                 )}
                               >
                                 <Icon className="size-5" />
@@ -148,7 +157,7 @@ export function DashboardSidebar({ links, organizations, currentOrgId, }: Dashbo
                                         ? "bg-muted"
                                         : "text-muted-foreground hover:text-accent-foreground",
                                       item.disabled &&
-                                        "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-muted-foreground",
+                                        "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-muted-foreground"
                                     )}
                                   >
                                     <span className="flex size-full items-center justify-center">
@@ -180,7 +189,11 @@ export function DashboardSidebar({ links, organizations, currentOrgId, }: Dashbo
   );
 }
 
-export function MobileSheetSidebar({ currentOrgId, links, organizations }: DashboardSidebarProps) {
+export function MobileSheetSidebar({
+  currentOrgId,
+  links,
+  organizations,
+}: DashboardSidebarProps) {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   const { isSm, isMobile } = useMediaQuery();
@@ -212,7 +225,11 @@ export function MobileSheetSidebar({ currentOrgId, links, organizations }: Dashb
                   </span>
                 </Link>
 
-                <ProjectSwitcher currentOrgId={currentOrgId} large organizations={organizations} />
+                <ProjectSwitcher
+                  currentOrgId={currentOrgId}
+                  large
+                  organizations={organizations}
+                />
 
                 {links.map((section) => (
                   <section
@@ -240,7 +257,7 @@ export function MobileSheetSidebar({ currentOrgId, links, organizations }: Dashb
                                   ? "bg-muted"
                                   : "text-muted-foreground hover:text-accent-foreground",
                                 item.disabled &&
-                                  "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-muted-foreground",
+                                  "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-muted-foreground"
                               )}
                             >
                               <Icon className="size-5" />

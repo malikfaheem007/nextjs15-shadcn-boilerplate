@@ -7,7 +7,7 @@ import { RadialChartGrid } from "@/components/charts/radial-chart-grid";
 import { RadialShapeChart } from "@/components/charts/radial-shape-chart";
 import { RadialStackedChart } from "@/components/charts/radial-stacked-chart";
 import { RadialTextChart } from "@/components/charts/radial-text-chart";
-import { DashboardHeader } from "@/components/dashboard/header";
+import DashboardPageWrapper from "@/components/shared/DashboardPageWrapper";
 import { APP_NAME } from "@/constants";
 import { Metadata } from "next";
 
@@ -18,8 +18,7 @@ export const metadata: Metadata = {
 
 export default function ChartsPage() {
   return (
-    <>
-      <DashboardHeader heading="Charts" text="List of charts by shadcn-ui." />
+    <DashboardPageWrapper title="Charts" text="List of charts by shadcn-ui.">
       <div className="flex flex-col gap-5">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 2xl:grid-cols-4">
           <RadialTextChart />
@@ -37,6 +36,6 @@ export default function ChartsPage() {
           <RadialStackedChart />
         </div>
       </div>
-    </>
+    </DashboardPageWrapper>
   );
 }

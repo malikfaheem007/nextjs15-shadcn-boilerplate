@@ -1,12 +1,12 @@
 import { redirect } from "next/navigation";
 
 import { DeleteAccountSection } from "@/components/dashboard/delete-account";
-import { DashboardHeader } from "@/components/dashboard/header";
 import { UserNameForm } from "@/components/forms/user-name-form";
 import { UserRoleForm } from "@/components/forms/user-role-form";
 import { getCurrentUser } from "@/actions/user";
 import { APP_NAME } from "@/constants";
 import { Metadata } from "next";
+import DashboardPageWrapper from "@/components/shared/DashboardPageWrapper";
 
 export const metadata: Metadata = {
   title: `Settings | ${APP_NAME}`,
@@ -19,11 +19,10 @@ export default async function SettingsPage() {
   if (!user?.id) redirect("/login");
 
   return (
-    <>
-      <DashboardHeader
-        heading="Settings"
-        text="Manage account and website settings."
-      />
+    <DashboardPageWrapper
+      title="Settings"
+      text="Manage account and website settings."
+    >
       <div className="divide-y divide-muted pb-10">
         <UserNameForm
           user={{ id: user.id, name: user.user_metadata.firstName || "" }}
@@ -31,6 +30,6 @@ export default async function SettingsPage() {
         <UserRoleForm user={{ id: user.id, role: user.role }} />
         <DeleteAccountSection />
       </div>
-    </>
+    </DashboardPageWrapper>
   );
 }
