@@ -160,7 +160,7 @@ export function UserAuthForm({
         {type === "login" && (
           <div className="text-right text-sm">
             <a
-              href="/reset-password"
+              href="/forgot-password"
               className="text-muted-foreground underline underline-offset-4 hover:text-brand"
             >
               Forgot password?

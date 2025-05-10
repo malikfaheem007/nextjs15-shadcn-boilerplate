@@ -44,65 +44,64 @@ export default function SelectOrganization({
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4 dark:bg-gray-900">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
+    <div className="flex min-h-screen items-center justify-center p-4 dark:bg-gray-900">
+      <div className="w-full max-w-sm space-y-6">
+        <div className="text-center space-y-2">
           <Icons.logo className="mx-auto my-3" />
 
-          <CardTitle className="text-2xl font-bold">
+          <h1 className="text-2xl font-semibold tracking-tight">
             {organizations.length > 0
               ? "Select an Organization"
               : "Create an Organization"}
-          </CardTitle>
-          <CardDescription>
-            {organizations.length > 0 &&
-              "Choose an existing organization or create a new one"}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
+          </h1>
           {organizations.length > 0 && (
-            <>
-              <div className="space-y-3">
-                {organizations.map((org) => (
-                  <Button
-                    key={org.id}
-                    variant="outline"
-                    className="w-full justify-start h-auto py-3 px-4 text-base font-normal"
-                    onClick={() => handleSelectOrg(org.id)}
-                  >
-                    <Building className="mr-2 h-4 w-4" />
-                    {org.name}
-                  </Button>
-                ))}
-              </div>
-              <div className="py-2.5">
-                <TextSeparator>Or</TextSeparator>
-              </div>
-            </>
+            <p className="text-sm text-muted-foreground">
+              "Choose an existing organization or create a new one"
+            </p>
           )}
+        </div>
+        {organizations.length > 0 && (
+          <>
+            <div className="space-y-3">
+              {organizations.map((org) => (
+                <Button
+                  key={org.id}
+                  variant="outline"
+                  className="w-full justify-start h-auto py-3 px-4 text-base font-normal"
+                  onClick={() => handleSelectOrg(org.id)}
+                >
+                  <Building className="mr-2 h-4 w-4" />
+                  {org.name}
+                </Button>
+              ))}
+            </div>
+            <div className="py-2.5">
+              <TextSeparator>Or</TextSeparator>
+            </div>
+          </>
+        )}
 
-          <div className="space-y-3">
-            <InputWithLabel
-              label="New Organization"
-              placeholder="Organization name"
-              value={newOrgName}
-              onChange={(e) => setNewOrgName(e.target.value)}
-            />
+        <div className="space-y-3">
+          <InputWithLabel
+            label="New Organization"
+            placeholder="Organization name"
+            value={newOrgName}
+            onChange={(e) => setNewOrgName(e.target.value)}
+          />
 
-            <Button
-              onClick={handleCreateOrg}
-              disabled={!newOrgName.trim()}
-              className="w-full"
-            >
-              <Plus className="h-4 w-4" />
-              Create
-            </Button>
-          </div>
-        </CardContent>
-        <CardFooter className="text-xs text-muted-foreground text-center">
+          <Button
+            onClick={handleCreateOrg}
+            disabled={!newOrgName.trim()}
+            className="w-full"
+          >
+            <Plus className="h-4 w-4" />
+            Create
+          </Button>
+        </div>
+        <p className="text-center text-xs text-muted-foreground">
           You can manage organization settings after creation
-        </CardFooter>
-      </Card>
+        </p>
+      </div>
     </div>
   );
 }
