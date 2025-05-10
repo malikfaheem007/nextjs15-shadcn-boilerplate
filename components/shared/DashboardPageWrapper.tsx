@@ -33,13 +33,13 @@ export default function DashboardPageWrapper({
   const router = useRouter();
 
   return (
-    <Container className={clsx("space-y-4 lg:space-y-6 py-4 lg:py-6 xl:py-8", className)}>
+    <Container className={clsx("space-y-6 lg:space-y-8 p-4 lg:p-6 xl:p-8", className)}>
       {onBack && (
         <Button type="button" variant="outline" onClick={() => router.back()}>
           <ArrowLeft size={16} /> Go Back
         </Button>
       )}
-      
+
       <div className="flex w-full flex-col gap-4">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
