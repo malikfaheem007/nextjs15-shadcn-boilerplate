@@ -47,7 +47,8 @@ export default async function Dashboard({ children }: ProtectedLayoutProps) {
       <div className="flex flex-1 flex-col">
         {/* Header */}
         <header className="sticky top-0 z-50 bg-background border-b border-border">
-          <Container className="flex items-center justify-between h-14 lg:h-[60px] space-x-4">
+          <Container className="flex items-center p-4 lg:p-6 xl:p-8 justify-between h-14 lg:h-[60px] space-x-4">
+
             <MobileSheetSidebar
               currentOrgId={current_org_id}
               organizations={organizations}
