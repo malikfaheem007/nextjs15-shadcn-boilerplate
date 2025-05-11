@@ -3,8 +3,7 @@
 import { useTransition } from "react";
 import { openCustomerPortal } from "@/actions/open-customer-portal";
 
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/shared/icons";
+import {LoadingButton} from "@/components/shared/LoadingButton";
 
 interface CustomerPortalButtonProps {
   userStripeId: string;
@@ -20,11 +19,8 @@ export function CustomerPortalButton({
     startTransition(async () => await generateUserStripeSession());
 
   return (
-    <Button disabled={isPending} onClick={stripeSessionAction}>
-      {isPending ? (
-        <Icons.spinner className="mr-2 size-4 animate-spin" />
-      ) : null}
+    <LoadingButton loading={isPending} disabled={isPending} onClick={stripeSessionAction}>
       Open Customer Portal
-    </Button>
+    </LoadingButton>
   );
 }

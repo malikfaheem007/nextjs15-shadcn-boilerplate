@@ -3,17 +3,9 @@ import { stripe } from "@/lib/stripe";
 import {getCurrentOrganization, getCurrentOrgId} from "@/actions/organizations";
 import {UserSubscriptionPlan} from "@/types";
 
-export async function getUserSubscriptionPlan(
-  userId: string
-): Promise<UserSubscriptionPlan> {
-  if(!userId) throw new Error("Missing parameters");
-
+export async function getSubscriptionPlan(): Promise<UserSubscriptionPlan> {
   const org_id = await getCurrentOrgId()
   const organization = await getCurrentOrganization(org_id);
-
-  // if (!organization.stripeSubscription) {
-  //   throw new Error("Stripe: Something went wrong");
-  // }
 
   const {stripePriceId, stripeCurrentPeriodEnd, stripeSubscriptionId} = organization.stripeSubscription  || {};
 

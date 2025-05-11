@@ -1,11 +1,6 @@
-import { redirect } from "next/navigation";
-
-import { getUserSubscriptionPlan } from "@/lib/subscription";
+import { getSubscriptionPlan } from "@/lib/subscription";
 import { constructMetadata } from "@/lib/utils";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { BillingInfo } from "@/components/pricing/billing-info";
-import { Icons } from "@/components/shared/icons";
-import { getCurrentUser } from "@/actions/user";
 import DashboardPageWrapper from "@/components/shared/DashboardPageWrapper";
 
 export const metadata = constructMetadata({
@@ -14,40 +9,14 @@ export const metadata = constructMetadata({
 });
 
 export default async function BillingPage() {
-  const user = await getCurrentUser();
-
-  let userSubscriptionPlan;
-  if (user && user.id && user.role === "USER") {
-    userSubscriptionPlan = await getUserSubscriptionPlan(user.id);
-  } else {
-    redirect("/login");
-  }
+  const userSubscriptionPlan = await getSubscriptionPlan();
 
   return (
     <DashboardPageWrapper
       title="Billing"
       text="Manage billing and your subscription plan."
     >
-      <div className="grid gap-8">
-        <Alert className="!pl-14">
-          <Icons.warning />
-          <AlertTitle>This is a demo app.</AlertTitle>
-          <AlertDescription className="text-balance">
-            SaaS Starter app is a demo app using a Stripe test environment. You
-            can find a list of test card numbers on the{" "}
-            <a
-              href="https://stripe.com/docs/testing#cards"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-8"
-            >
-              Stripe docs
-            </a>
-            .
-          </AlertDescription>
-        </Alert>
         <BillingInfo userSubscriptionPlan={userSubscriptionPlan} />
-      </div>
     </DashboardPageWrapper>
   );
 }

@@ -4,8 +4,6 @@ import { useTransition } from "react";
 import { generateUserStripe } from "@/actions/generate-user-stripe";
 import { SubscriptionPlan, UserSubscriptionPlan } from "@/types";
 
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/shared/icons";
 import {LoadingButton} from "@/components/shared/LoadingButton";
 
 interface BillingFormButtonProps {
@@ -37,6 +35,7 @@ export function BillingFormButton({
       variant={userOffer ? "default" : "outline"}
       className="w-full"
       disabled={isPending}
+      loading={isPending}
       onClick={stripeSessionAction}
     >
       {userOffer ? "Manage Subscription" : "Upgrade"}

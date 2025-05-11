@@ -6,20 +6,18 @@ import { SubscriptionPlan, UserSubscriptionPlan } from "@/types";
 
 import { pricingData } from "@/config/subscriptions";
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { BillingFormButton } from "@/components/forms/billing-form-button";
 import { HeaderSection } from "@/components/shared/header-section";
 import { Icons } from "@/components/shared/icons";
-import { useRouter } from "next/navigation";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import Container from "@/components/shared/Container";
 
 interface PricingCardsProps {
-  userId?: string;
   subscriptionPlan?: UserSubscriptionPlan;
 }
 
-export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
+export function PricingCards({ subscriptionPlan }: PricingCardsProps) {
   const isYearlyDefault =
     !subscriptionPlan?.stripeCustomerId || subscriptionPlan.interval === "year";
   const [isYearly, setIsYearly] = useState<boolean>(isYearlyDefault);
@@ -29,8 +27,6 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
   };
 
   const PricingCard = ({ offer }: { offer: SubscriptionPlan }) => {
-    const router = useRouter();
-
     return (
       <div
         className={cn(
@@ -95,7 +91,7 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
               ))}
           </ul>
 
-          {userId && subscriptionPlan ? (
+          {subscriptionPlan ? (
             offer.title === "Starter" ? (
                     <Button
                         variant="outline"
