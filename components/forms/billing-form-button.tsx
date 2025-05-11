@@ -6,6 +6,7 @@ import { SubscriptionPlan, UserSubscriptionPlan } from "@/types";
 
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/shared/icons";
+import {LoadingButton} from "@/components/shared/LoadingButton";
 
 interface BillingFormButtonProps {
   offer: SubscriptionPlan;
@@ -32,19 +33,13 @@ export function BillingFormButton({
     offer.stripeIds[year ? "yearly" : "monthly"];
 
   return (
-    <Button
+    <LoadingButton
       variant={userOffer ? "default" : "outline"}
-      className="w-full rounded-full"
+      className="w-full"
       disabled={isPending}
       onClick={stripeSessionAction}
     >
-      {isPending ? (
-        <>
-          <Icons.spinner className="mr-2 size-4 animate-spin" /> Loading...
-        </>
-      ) : (
-        <>{userOffer ? "Manage Subscription" : "Upgrade"}</>
-      )}
-    </Button>
+      {userOffer ? "Manage Subscription" : "Upgrade"}
+    </LoadingButton>
   );
 }

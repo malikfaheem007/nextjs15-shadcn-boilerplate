@@ -34,7 +34,7 @@ export function NavBar({ scroll = false, user }: NavBarProps) {
         <div className="flex gap-6 md:gap-10">
           <Link href="/" className="flex items-center space-x-1.5">
             <Icons.logo />
-            <span className="font-urban text-xl font-bold">
+            <span className="text-xl font-bold">
               {siteConfig.name}
             </span>
           </Link>

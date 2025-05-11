@@ -42,7 +42,7 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
         key={offer.title}
       >
         <div className="min-h-[150px] items-start space-y-4 bg-muted/50 p-6">
-          <p className="flex font-urban text-sm font-bold uppercase tracking-wider text-muted-foreground">
+          <p className="flex text-sm font-bold uppercase tracking-wider text-muted-foreground">
             {offer.title}
           </p>
 
@@ -97,17 +97,17 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
 
           {userId && subscriptionPlan ? (
             offer.title === "Starter" ? (
-              <Link
-                href="/dashboard"
-                className={cn(
-                  buttonVariants({
-                    variant: "outline",
-                  }),
-                  "w-full"
-                )}
-              >
-                Go to dashboard
-              </Link>
+                    <Button
+                        variant="outline"
+                        className="w-full"
+                        asChild
+                    >
+                      <Link
+                          href="/dashboard"
+                      >
+                        Go to dashboard
+                      </Link>
+                    </Button>
             ) : (
               <BillingFormButton
                 year={isYearly}
@@ -116,16 +116,21 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
               />
             )
           ) : (
-            <Button
-              variant={
-                offer.title.toLocaleLowerCase() === "pro"
-                  ? "default"
-                  : "outline"
-              }
-              onClick={() => router.push("/login")}
-            >
-              Sign in
-            </Button>
+              <Button
+                  className="w-full"
+                  asChild
+                  variant={
+                      offer.title.toLocaleLowerCase() === "pro"
+                          ? "default"
+                          : "outline"
+                  }
+              >
+                  <Link
+                      href="/login"
+                  >
+                      Sign in
+                  </Link>
+              </Button>
           )}
         </div>
       </div>
@@ -148,14 +153,14 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
           >
             <ToggleGroupItem
               value="yearly"
-              className="rounded-full px-5 data-[state=on]:!bg-primary data-[state=on]:!text-primary-foreground"
+              className="!rounded-full px-5 data-[state=on]:!bg-primary data-[state=on]:!text-primary-foreground"
               aria-label="Toggle yearly billing"
             >
               Yearly (-20%)
             </ToggleGroupItem>
             <ToggleGroupItem
               value="monthly"
-              className="rounded-full px-5 data-[state=on]:!bg-primary data-[state=on]:!text-primary-foreground"
+              className="!rounded-full px-5 data-[state=on]:!bg-primary data-[state=on]:!text-primary-foreground"
               aria-label="Toggle monthly billing"
             >
               Monthly

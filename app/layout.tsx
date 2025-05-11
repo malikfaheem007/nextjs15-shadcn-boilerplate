@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 
-import { fontGeist, fontHeading, fontSans, fontUrban } from "@/assets/fonts";
+import { fontMain } from "@/assets/fonts";
 import { ThemeProvider } from "next-themes";
 
 import { cn, constructMetadata } from "@/lib/utils";
@@ -20,11 +20,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
             className={cn(
-                "min-h-screen bg-background font-sans antialiased",
-                fontSans.variable,
-                fontUrban.variable,
-                fontHeading.variable,
-                fontGeist.variable,
+                "min-h-screen bg-background antialiased",
+                fontMain.className,
             )}
         >
             <ThemeProvider

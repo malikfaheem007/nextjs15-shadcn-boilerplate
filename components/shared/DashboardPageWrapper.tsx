@@ -44,7 +44,7 @@ export default function DashboardPageWrapper({
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             {title && (
-              <h1 className="font-heading text-2xl font-bold">
+              <h1 className="text-2xl font-bold">
                 {title}
               </h1>
             )}

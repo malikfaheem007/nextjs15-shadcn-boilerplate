@@ -214,7 +214,7 @@ const logos = [
             strokeWidth="20"
           ></line>
         </svg>
-        <span className="font-geist text-[23px] font-bold">shadcn/ui</span>
+        <span className="text-[23px] font-bold">shadcn/ui</span>
       </div>
     ),
   },
