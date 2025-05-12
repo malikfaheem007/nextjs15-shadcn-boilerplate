@@ -7,7 +7,7 @@ export async function getSubscriptionPlan(): Promise<UserSubscriptionPlan> {
   const org_id = await getCurrentOrgId()
   const organization = await getCurrentOrganization(org_id);
 
-  const {stripePriceId, stripeCurrentPeriodEnd, stripeSubscriptionId} = organization.stripeSubscription  || {};
+  const {stripePriceId, stripeCurrentPeriodEnd, stripeSubscriptionId} = organization.stripe_subscription  || {};
 
   const stripeCurrentPeriodEndDate = new Date(stripeCurrentPeriodEnd);
 
@@ -41,7 +41,7 @@ export async function getSubscriptionPlan(): Promise<UserSubscriptionPlan> {
 
   return {
     ...plan,
-    ...organization.stripeSubscription,
+    ...organization.stripe_subscription,
     stripeCurrentPeriodEnd: stripeCurrentPeriodEndDate?.getTime(),
     isPaid,
     interval,

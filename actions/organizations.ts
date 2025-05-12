@@ -38,6 +38,14 @@ export async function createOrganization(name: string) {
     return data;
 }
 
+export async function updateOrganization(id: string, newData: any) {
+    const supabase = await createClient();
+
+    const {error} = await supabase.from("organizations").update(newData).eq(id, id);
+
+    if(error) throw error;
+}
+
 export async function setCurrentOrgId(orgId: string) {
     const supabase = await createClient();
 

@@ -28,5 +28,5 @@ export type StripeSubscription = {
 export type Organization = {
     id: string;
     name: string;
-    stripeSubscription: StripeSubscription
+    stripe_subscription: StripeSubscription
 };

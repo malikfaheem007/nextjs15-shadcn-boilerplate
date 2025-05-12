@@ -5,6 +5,7 @@ import { getSubscriptionPlan } from "@/lib/subscription";
 import { absoluteUrl } from "@/lib/utils";
 import { redirect } from "next/navigation";
 import {getCurrentUser} from "@/actions/user";
+import {getCurrentOrgId} from "@/actions/organizations";
 
 export type responseAction = {
   status: "success" | "error";
@@ -17,6 +18,12 @@ export async function generateUserStripe(priceId: string): Promise<responseActio
   let redirectUrl: string = "";
 
   try {
+    const orgId = await getCurrentOrgId();
+
+    if (!orgId) {
+      throw new Error("Unauthorized");
+    }
+
     const user = await getCurrentUser();
 
     if (!user || !user.email || !user.id) {
@@ -50,6 +57,7 @@ export async function generateUserStripe(priceId: string): Promise<responseActio
         ],
         metadata: {
           userId: user.id,
+          organizationId: orgId,
         },
       })
 

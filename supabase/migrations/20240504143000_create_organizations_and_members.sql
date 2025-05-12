@@ -4,7 +4,8 @@ create table if not exists organizations (
     name text not null,
     created_at timestamp with time zone default now(),
     metadata jsonb default '{}'::jsonb,
-    logo_url text
+    logo_url text,
+    stripe_subscription jsonb default '{}'::jsonb  -- Added stripeSubscription field
     );
 
 alter table organizations enable row level security;
