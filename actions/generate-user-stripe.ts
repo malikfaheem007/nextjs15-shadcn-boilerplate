@@ -41,6 +41,11 @@ export async function generateUserStripe(priceId: string): Promise<responseActio
 
       redirectUrl = stripeSession.url as string
     } else {
+      const metadata = {
+        userId: user.id,
+        organizationId: orgId,
+      };
+
       // User on Free Plan - Create a checkout session to upgrade.
       const stripeSession = await stripe.checkout.sessions.create({
         success_url: billingUrl,
@@ -55,12 +60,15 @@ export async function generateUserStripe(priceId: string): Promise<responseActio
             quantity: 1,
           },
         ],
-        metadata: {
-          userId: user.id,
-          organizationId: orgId,
-        },
-      })
+        metadata,
+        client_reference_id: orgId,
+        allow_promotion_codes: true,
+        subscription_data: {
+          trial_period_days: 14,
+          metadata
+        }
 
+      })
       redirectUrl = stripeSession.url as string
     }
   } catch (error) {

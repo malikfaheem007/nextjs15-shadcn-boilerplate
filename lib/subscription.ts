@@ -7,19 +7,15 @@ export async function getSubscriptionPlan(): Promise<UserSubscriptionPlan> {
   const org_id = await getCurrentOrgId()
   const organization = await getCurrentOrganization(org_id);
 
-  const {stripePriceId, stripeCurrentPeriodEnd, stripeSubscriptionId} = organization.stripe_subscription  || {};
-
-  const stripeCurrentPeriodEndDate = new Date(stripeCurrentPeriodEnd);
+  const {stripePriceId, stripeSubscriptionId} = organization.stripe_subscription  || {};
 
   // Check if user is on a paid plan.
-  const isPaid =
-    !!(stripePriceId &&
-        stripeCurrentPeriodEndDate?.getTime() + 86_400_000 > Date.now());
+  const isPaid = !!stripePriceId;
 
   // Find the pricing data corresponding to the user's plan
-  const userPlan =
-    pricingData.find((plan) => plan.stripeIds.monthly === stripePriceId) ||
-    pricingData.find((plan) => plan.stripeIds.yearly === stripePriceId);
+  const userPlan = pricingData.find(
+      (plan) => plan.stripeIds.monthly === stripePriceId || plan.stripeIds.yearly === stripePriceId
+  );
 
   const plan = isPaid && userPlan ? userPlan : pricingData[0]
 
@@ -42,7 +38,6 @@ export async function getSubscriptionPlan(): Promise<UserSubscriptionPlan> {
   return {
     ...plan,
     ...organization.stripe_subscription,
-    stripeCurrentPeriodEnd: stripeCurrentPeriodEndDate?.getTime(),
     isPaid,
     interval,
     isCanceled

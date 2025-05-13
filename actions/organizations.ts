@@ -14,9 +14,8 @@ export async function getUserOrganizations() {
 
 export async function getCurrentOrganization(id: string): Promise<Organization> {
     const supabase = await createClient();
-    const { data, error } = await supabase.rpc('get_organization_by_id', {
-        org_id: id,
-    });
+
+    const { data, error } = await supabase.from("organizations").select("*").eq("id", id).single();
 
     if(error) throw error;
 
@@ -41,7 +40,7 @@ export async function createOrganization(name: string) {
 export async function updateOrganization(id: string, newData: any) {
     const supabase = await createClient();
 
-    const {error} = await supabase.from("organizations").update(newData).eq(id, id);
+    const {error} = await supabase.from("organizations").update(newData).eq("id", id);
 
     if(error) throw error;
 }

@@ -1,5 +1,6 @@
 import {UserRoles} from "@/constants";
 import {Icons} from "@/components/shared/icons";
+import Stripe from "stripe";
 
 export type NavItem = {
     title: string;
@@ -20,9 +21,9 @@ export type SidebarNavItem = {
 
 export type StripeSubscription = {
     stripeSubscriptionId: string,
-    stripeCurrentPeriodEnd: number,
     stripeCustomerId: string,
     stripePriceId: string,
+    subscriptionStatus: Stripe.Subscription.Status,
 }
 
 export type Organization = {

@@ -45,6 +45,7 @@ export async function updateSession(request: NextRequest) {
     "/register",
     "/forgot-password",
     "/reset-password",
+    "/api/webhooks",
   ];
   const isPublicPath = publicPaths.some((path) =>
     request.nextUrl.pathname.startsWith(path)
